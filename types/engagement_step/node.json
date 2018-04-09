@@ -1,0 +1,17 @@
+{
+    "title": "Engagement Step",
+    "_parent": "n:node",
+    "description": "cxindex:engagement_step",
+    "_qname": "cxindex:engagement_step",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "title": "Stage name"
+        },
+        "description": {
+            "type": "string",
+            "title": "Description"
+        }
+    }
+}

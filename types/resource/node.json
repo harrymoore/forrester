@@ -1,0 +1,52 @@
+{
+    "_parent": "n:node",
+    "_qname": "cxindex:company",
+    "description": "cxindex:resource",
+    "title": "Resource",
+    "type": "object",
+    "dependencies": {
+        "url": [
+            "ResourceType"
+        ],
+        "binary": [
+            "ResourceType"
+        ]
+    },
+    "properties": {
+        "ResourceTitle": {
+            "type": "string",
+            "title": "Title"
+        },
+        "ResourceType": {
+            "type": "string",
+            "title": "Type",
+            "enum": [
+                "html",
+                "pdf",
+                "ms-doc",
+                "image",
+                "media"
+            ],
+            "required": true
+        },
+        "ResourceDescription": {
+            "type": "string",
+            "title": "Description"
+        },
+        "ResourceURL": {
+            "type": "string",
+            "title": "URL (optional)",
+            "format": "url"
+        },
+        "binary": {
+            "type": "object",
+            "_relator": {
+                "associationType": "a:linked",
+                "nodeType": "n:node"
+            }
+        },
+        "ResourcePublishingDate": {
+            "type": "string"
+        }
+    }
+}

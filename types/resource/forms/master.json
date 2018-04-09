@@ -1,0 +1,26 @@
+{
+    "title": "Enter a resource",
+    "engineId": "alpaca1",
+    "fields": {
+        "ResourceURL": {
+            "dependencies": {
+                "ResourceType": [
+                    "html"
+                ]
+            }
+        },
+        "binary": {
+            "type": "related-content",
+            "uploadPath": "/Client Docs/",
+            "dependencies": {
+                "ResourceType": [
+                    "pdf",
+                    "ms-doc",
+                    "image",
+                    "media"
+                ]
+            }
+        }
+    },
+    "_form_key": "master"
+}

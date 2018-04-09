@@ -1,0 +1,57 @@
+{
+    "title": "Company",
+    "_parent": "n:node",
+    "description": "cxindex:company",
+    "_qname": "cxindex:company",
+    "type": "object",
+    "properties": {
+        "clientid": {
+            "type": "string",
+            "title": "Client id"
+        },
+        "title": {
+            "type": "string",
+            "title": "Client name"
+        },
+        "engagement": {
+            "type": "array",
+            "title": "Engagement Steps",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "step": {
+                        "type": "object",
+                        "_relator": {
+                            "associationType": "a:linked",
+                            "nodeType": "cxindex:engagement_step"
+                        }
+                    },
+                    "titleOverride": {
+                        "type": "string",
+                        "title": "Override default step name"
+                    },
+                    "date": {
+                        "type": "string",
+                        "title": "Scheduled Date",
+                        "format": "datetime"
+                    },
+                    "completed": {
+                        "type": "boolean",
+                        "title": "Completed?"
+                    }
+                }
+            }
+        },
+        "resources": {
+            "type": "array",
+            "title": "Resources",
+            "items": {
+                "type": "object",
+                "_relator": {
+                    "associationType": "a:linked",
+                    "nodeType": "cxindex:resource"
+                }
+            }
+        }
+    }
+}

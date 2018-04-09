@@ -1,0 +1,13 @@
+{
+    "title": "Enter an Engagement Step",
+    "engineId": "alpaca1",
+    "fields": {
+        "title": {
+            "type": "text"
+        },
+        "description": {
+            "type": "ckeditor"
+        }
+    },
+    "_form_key": "master"
+}
