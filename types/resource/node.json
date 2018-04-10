@@ -1,6 +1,6 @@
 {
     "_parent": "n:node",
-    "_qname": "cxindex:company",
+    "_qname": "cxindex:resource",
     "description": "cxindex:resource",
     "title": "Resource",
     "type": "object",
