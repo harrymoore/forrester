@@ -1,0 +1,42 @@
+{
+    "title": "Program Manager",
+    "config": {
+        "blocks": [
+            {
+                "evaluator": "context-platform",
+                "config": {
+                    "context": {
+                        "items": [
+                            {
+                                "key": "platform/dashboard",
+                                "title": "CMS Dashboard"
+                            },
+                            {
+                                "key": "platform/resources",
+                                "items": [
+                                    {
+                                        "key": "platform/projects",
+                                        "title": "Forrester Projects"
+                                    }
+                                ]
+                            },
+                            {
+                                "key": "platform/collaborate",
+                                "remove": true
+                            },
+                            {
+                                "key": "platform/manage",
+                                "remove": true
+                            },
+                            {
+                                "key": "platform/developers",
+                                "remove": true
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "enabled": true
+}

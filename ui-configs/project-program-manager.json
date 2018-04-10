@@ -13,19 +13,34 @@
                                 "items": [
                                     {
                                         "key": "project/content",
-                                        "remove": true
+                                        "title": "Accounts",
+                                        "remove": false
+                                    },
+                                    {
+                                        "key": "project/documents",
+                                        "title": "Files (Documents)",
+                                        "remove": false
                                     },
                                     {
                                         "key": "project/datalists",
+                                        "remove": true
+                                    },
+                                    {
+                                        "key": "project/tags",
                                         "remove": true
                                     }
                                 ]
                             },
                             {
                                 "key": "project/search/heading",
+                                "remove": false,
                                 "items": [
                                     {
                                         "key": "project/dataviews",
+                                        "remove": true
+                                    },
+                                    {
+                                        "key": "project/saved-searches",
                                         "remove": true
                                     }
                                 ]
@@ -75,11 +90,33 @@
                                 "key": "document",
                                 "items": [
                                     {
+                                        "key": "document/overview",
+                                        "title": "View Account (read only)",
+                                        "remove": false
+                                    },
+                                    {
+                                        "key": "document/properties",
+                                        "title": "Edit Account",
+                                        "remove": false
+                                    },
+                                    {
                                         "key": "document/actions",
                                         "remove": true
                                     },
                                     {
                                         "key": "document/associations",
+                                        "remove": true
+                                    },
+                                    {
+                                        "key": "document/attachments",
+                                        "remove": true
+                                    },
+                                    {
+                                        "key": "document/comments",
+                                        "remove": true
+                                    },
+                                    {
+                                        "key": "document/editor",
                                         "remove": true
                                     },
                                     {
@@ -130,5 +167,6 @@
             }
         ]
     },
-    "enabled": true
+    "enabled": true,
+    "projectId": "58bbbc66c90f889f67a8"
 }
