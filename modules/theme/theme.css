@@ -31,6 +31,14 @@ div[region="workspace-bar"] {
     border-bottom: 1px #4B7D28 solid
 }
 
+.workspace-bar .form-control {
+    color: #333333;
+}
+
+.workspace-bar a.btn.btn-default {
+    color: #333333;
+}
+
 .project-icon-48, .project-icon-64{
     display: none;
 }
