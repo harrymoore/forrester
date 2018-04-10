@@ -1,141 +1,45 @@
 .cloudcms-theme .context-header-logo {
     background: url("https://go.forrester.com/wp-content/themes/forrester-timber-theme/assets/img/retina_logo.png");
-    height: 23px;
-    width: 133px;
+    height: 48px;
+    width: 333px;
+    background-repeat: no-repeat;
+}
+
+.cloudcms-theme-header.cloudcms-theme-header-platform {
+    background-color: #333333
+}
+
+.cloudcms-theme-header.cloudcms-theme-header-project {
+    background-color: #333333
+}
+
+div[region="workspace-bar"] {
+    background-color: #DFE5E8;
+    min-height: 47px;
+}
+
+.workspace-bar a:visited {
+    color: #000000;
+}
+
+.workspace-bar a {
+    color: #000000;
+}
+
+.workspace-bar {
+    border-top: 1px #4B7D28 solid;
+    border-bottom: 1px #4B7D28 solid
 }
 
 .project-icon-48, .project-icon-64{
     display: none;
 }
+
 .cloudcms-theme .context-header-title {
     display: none;
 }
 
-#footer,
-#push {
-    height: 0;
-    overflow: hidden;
-}
+/* body {
+    background-color: #DFE5E8;
+} */
 
-.cloudcms-theme .workspace-bar a:visited {
-    color: #fff;
-}
-
-.cloudcms-theme .workspace-bar .form-control {
-    background-color: transparent;
-    color: #dfe5e8;
-    display: inline-block;
-    width: auto;
-    border-color: #333;
-    margin-top: 6px;
-    margin-bottom: 6px;
-}
-
-.cloudcms-theme-header .btn-link {
-    color: #dfe5e8;
-}
-
-
-.cloudcms-theme .cloudcms-theme-header {
-    background-color: #dfe5e8;
-    border-color: #dfe5e8;
-    height: 64px;
-    border-bottom: 5px solid #dfe5e8;
-}
-
-.cloudcms-theme .workspace-bar a.btn.btn-default {
-    background-color: transparent;
-    color: #fff;
-    display: inline-block;
-    width: auto;
-    font-weight: 200;
-    border-color: #fff;
-    margin-top: -2px;
-}
-
-div[region="workspace-bar"] {
-    background-color: #000;
-    min-height: 50px;
-    border-top: 5px solid #dfe5e8;
-    border-bottom: 5px solid #000;
-}
-
-a {
-    color: #1b75bb;
-    text-decoration: none;
-}
-
-.navmenu .nav a.navlink {
-    color: #333;
-    white-space: nowrap;
-    overflow: hidden;
-    line-height: 16px;
-    padding: 12px 0;
-    display: block;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 200;
-}
-
-.navmenu .nav li.active a.navlink {
-    background-color: #efefef;
-    color: #333;
-    font-weight: 700;
-    text-transform: none;
-}
-
-.navmenu .nav .header {
-    border-top: 1px #e3e3e3 solid;
-    color: #60a630;
-    text-align: center;
-    text-transform: uppercase;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    font-size: 12px;
-}
-
-.list-row-info a {
-    color: #1b75bb;
-}
-
-.alpaca-field-checkbox label.control-label {
-    margin-top: 0px;
-}
-
-
-/*.wizard-nav-list li.active > a {
-    background-color: #036b37;
-}
-
-.wizard-progress-container {
-    margin-top: 20px;
-    padding: 15px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    display: none;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #60a630;
-    border-color: #60a630;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary.focus,
-.btn-primary:active,
-.btn-primary.active,
-.open>.dropdown-toggle.btn-primary {
-    color: #fff;
-    background-color: #036b37;
-    border-color: #036b37;
-}
-
-.modal-header {
-    background-color: #60a630;
-    background-image: none;
-    border-radius: 5px 5px 0px 0px;
-    color: white;
-}*/
