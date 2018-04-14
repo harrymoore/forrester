@@ -1,0 +1,27 @@
+{
+    "evaluator": "context-project",
+    "config": {
+        "context": {
+            "items": [{
+                "key": "forrester-ui-account-list/header",
+                "title": "Account List",
+                "order": 10000,
+                "header": true,
+                "iconClass": "fa fa-dashboard",
+                "allowAuthority": ["manager"],
+                "allowPermission": ["read"],
+                "rejectAuthority": [],
+                "rejectPermission": [],
+                "items": [{
+                    "key": "forrester-ui/account-list",
+                    "title": "Account List",
+                    "uri": "#/projects/{projectId}/forrester-ui-account-list",
+                    "iconClass": "fa fa-pencil",
+                    "allowPermission": [
+                        "read"
+                    ]
+                }]
+            }]
+        }
+    }
+}

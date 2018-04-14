@@ -1,0 +1,8 @@
+{
+    "type": "forrester-ui-account-list",
+    "config": {
+        "chrome": {
+            "title": "Account List"
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "title": "Accounts",
+    "uri": "/projects/{projectId}/forrester-ui-account-list",
+    "extends": "project/_project",
+    "template": "account-list-template"
+}

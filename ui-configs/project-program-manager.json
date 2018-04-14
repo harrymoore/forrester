@@ -91,12 +91,12 @@
                                 "items": [
                                     {
                                         "key": "document/overview",
-                                        "title": "View Account (read only)",
+                                        "title": "View",
                                         "remove": false
                                     },
                                     {
                                         "key": "document/properties",
-                                        "title": "Edit Account",
+                                        "title": "Edit",
                                         "remove": false
                                     },
                                     {
