@@ -1,113 +1,179 @@
 define(function(require, exports, module) {
 
     require("css!./account-list.css");
-    var html = require("text!./account-list.html");
 
-    var Empty = require("ratchet/dynamic/empty");
+    var Ratchet = require("ratchet/web");
+    var DocList = require("ratchet/dynamic/doclist");
+    var OneTeam = require("oneteam");
+    var bundle = Ratchet.Messages.using();
 
-    var UI = require("ui");
+    return Ratchet.GadgetRegistry.register("account-list", DocList.extend({
 
-    return UI.registerGadget("account-list", Empty.extend({
+        configureDefault: function()
+        {
+            this.base();
 
-        TEMPLATE: html,
-
-        /**
-         * Binds this gadget to the route
-         */
-        setup: function() {
-            this.get("/projects/{projectId}/forrester-ui-account-list", this.index);
-        },
-
-        /**
-         * Puts variables into the model for rendering within our template.
-         * Once we've finished setting up the model, we must fire callback().
-         *
-         * @param el
-         * @param model
-         * @param callback
-         */
-        prepareModel: function(el, model, callback) {
-
-            // get the current project
-            var project = this.observable("project").get();
-
-            // the current branch
-            var branch = this.observable("branch").get();
-
-            // call into base method and then set up the model
-            this.base(el, model, function() {
-
-                branch.queryNodes({
-                        _type: "cxindex:company"
-                    },{
-                        sort: {
-                            "_system.modified_on.ms": -1,
-                            title: 1
-                        },
-                        limit: 10
-                    }).then(function() {
-
-                    model.nodes = this.asArray();
-
-                    for (var i = 0; i < model.nodes.length; i++)
-                    {
-                        var node = model.nodes[i];
-
-                        node.imageUrl256 = "/preview/repository/" + node.getRepositoryId() + "/branch/" + node.getBranchId() + "/node/" + node.getId() + "/default?size=256&name=preview256&force=true";
-                        node.imageUrl128 = "/preview/repository/" + node.getRepositoryId() + "/branch/" + node.getBranchId() + "/node/" + node.getId() + "/default?size=128&name=preview128&force=true";
-                        node.browseUrl = "/#/projects/" + project._doc + "/documents/" + node._doc;
-                        node._system = node.getSystemMetadata()
-                    }
-
-                    callback();
-                });
+            this.config({
+                "observables": {
+                    "query": "account-list_query",
+                    "sort": "account-list_sort",
+                    "sortDirection": "account-list_sortDirection",
+                    "searchTerm": "account-list_searchTerm",
+                    "selectedItems": "account-list_selectedItems"
+                }
             });
         },
 
-        /**
-         * This method gets called before the rendered DOM element is injected into the page.
-         *
-         * @param el the dom element
-         * @param model the model used to render the template
-         * @param callback
-         */
-        /*
-        beforeSwap: function(el, model, callback)
+        setup: function()
         {
-            this.base(el, model, function() {
-                callback();
-            });
+            this.get("/projects/{projectId}/account-list", this.index);
         },
-        */
 
-        /**
-         * This method gets called after the rendered DOM element has been injected into the page.
-         *
-         * @param el the new dom element (in page)
-         * @param model the model used to render the template
-         * @param originalContext the dispatch context used to inject
-         * @param callback
-         */
-        afterSwap: function(el, model, originalContext, callback)
+        entityTypes: function()
         {
-            this.base(el, model, originalContext, function() {
+            return {
+                "plural": "forms",
+                "singular": "form"
+            }
+        },
 
-                // find all .media-popups and attach to a lightbox
-                $(el).find(".media-popup").click(function(e) {
+        doclistDefaultConfig: function()
+        {
+            var config = this.base();
+            config.columns = [];
 
-                    e.preventDefault();
+            return config;
+        },
 
-                    var nodeIndex = $(this).attr("data-media-index");
-                    var node = model.nodes[nodeIndex];
+        doRemoteQuery: function(context, model, searchTerm, query, pagination, callback)
+        {
+            var self = this;
 
-                    UI.showPopupModal({
-                        "title": "Viewing: " + node.title,
-                        "body": "<div style='text-align:center'><img src='" + node._doc + "'></div>"
+            OneTeam.projectContentTypes(self, function(typeDescriptors, typeConfigs) {
+
+                // organize type descriptors by id
+                var typeDescriptorsById = [];
+                for (var i = 0; i < typeDescriptors.length; i++)
+                {
+                    typeDescriptorsById[typeDescriptors[i].id] = typeDescriptors[i];
+                }
+
+                if (!query) {
+                    query = {};
+                }
+                query["_type"] = "n:form";
+
+                OneTeam.projectBranch(self, function () {
+
+                    var forms = {};
+                    var formIds = [];
+
+                    this.queryNodes(query, pagination).each(function () {
+                        forms[this._doc] = {
+                            "_doc": this._doc,
+                            "id": this._doc,
+                            "title": this.title,
+                            "type": "form",
+                            "created_on": this.getSystemMetadata().created_on,
+                            "created_by": this.getSystemMetadata().created_by,
+                            "modified_on": this.getSystemMetadata().modified_on,
+                            "modified_by": this.getSystemMetadata().modified_by
+                        };
+                        formIds.push(this._doc);
+                    }).then(function () {
+
+                        var totalRows = this.totalRows();
+                        var size = this.size();
+                        var offset = this.offset();
+
+                        OneTeam.projectBranch(self, function () {
+
+                            var rows = [];
+
+                            // look up all associations pointing to these forms
+                            this.queryNodes({
+                                "_type": "a:has_form",
+                                "target": {
+                                    "$in": formIds
+                                }
+                            }).each(function () {
+                                forms[this.target].key = this["form-key"];
+                                forms[this.target].definition = typeDescriptorsById[this.source];
+                                rows.push(forms[this.target]);
+                            }).then(function () {
+
+                                callback({
+                                    "rows": rows,
+                                    "totalRows": totalRows,
+                                    "size": size,
+                                    "offset": offset
+                                });
+                            });
+                        });
                     });
                 });
-
-                callback();
             });
+        },
+
+        linkUri: function(row, model, context)
+        {
+            var self = this;
+            var project = self.observable("project").get();
+
+            var definitionQName = row.definition.qname;
+            var formKey = row["key"];
+
+            return "/#/projects/" + project._doc + "/definitions/" + definitionQName + "/forms/" + formKey;
+        },
+
+        iconClass: function(row)
+        {
+            return "form-icon-64";
+        },
+
+        columnValue: function(row, item, model, context)
+        {
+            var self = this;
+
+            var projectId = self.observable("project").get().getId();
+            var definitionId = row.definition.id;
+
+            var value = this.base(row, item);
+
+            if (item.key === "titleDescription") {
+
+                var linkUri = this.linkUri(row, model, context);
+
+                value =  "<h2 class='list-row-info title'>";
+                value += "<a href='" + linkUri + "'>";
+                value += OneTeam.filterXss(row.title) + " (" + row.key + ")";
+                value += "</a>";
+                value += "</h2>";
+
+                // summary
+                var summary = "";
+                summary += "Definition: " + OneTeam.filterXss(row.definition.title) + " (<a href='#/projects/" + projectId + "/documents/" + definitionId + "'>" + OneTeam.filterXss(row.definition.qname) + "</a>)";
+                value += "<p class='list-row-info summary'>" + summary + "</p>";
+
+                if (row.modified_on)
+                {
+                    var date = new Date(row.modified_on.ms);
+                    value += "<p class='list-row-info modified'>Modified " + bundle.relativeDate(date);
+                    if (row.modified_by) {
+                        value += " by " + OneTeam.filterXss(row.modified_by) + "</p>";
+                    }
+                }
+                else if (row.created_on)
+                {
+                    var date = new Date(row.created_on.ms);
+                    value += "<p class='list-row-info created'>Created " + bundle.relativeDate(date);
+                    if (row.created_by) {
+                        value += " by " + OneTeam.filterXss(row.created_by) + "</p>";
+                    }
+                }
+            }
+
+            return value;
         }
 
     }));

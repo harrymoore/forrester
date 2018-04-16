@@ -9,8 +9,8 @@
     "config": {
         "context": {
             "items": [{
-                "key": "forrester-ui-account-list/header",
-                "title": "Account List Page",
+                "key": "account-list/header",
+                "title": "Accounts",
                 "order": 1000,
                 "header": true,
                 "iconClass": "fa fa-dashboard",
@@ -21,7 +21,7 @@
                 "items": [{
                     "key": "forrester-ui/account-list",
                     "title": "Account List",
-                    "uri": "#/projects/{projectId}/forrester-ui-account-list",
+                    "uri": "#/projects/{projectId}/account-list",
                     "iconClass": "fa fa-pencil",
                     "allowPermission": [
                         "read"

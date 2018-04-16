@@ -1,5 +1,5 @@
 {
-    "type": "forrester-ui-account-list",
+    "type": "account-list",
     "config": {
         "chrome": false,
         "buttons": [],
