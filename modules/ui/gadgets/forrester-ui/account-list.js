@@ -7,7 +7,7 @@ define(function(require, exports, module) {
     var OneTeam = require("oneteam");
     var bundle = Ratchet.Messages.using();
 
-    return Ratchet.GadgetRegistry.register("account-list", DocList.extend({
+    return Ratchet.GadgetRegistry.register("forrester-ui-account-list", DocList.extend({
 
         configureDefault: function()
         {
@@ -26,15 +26,15 @@ define(function(require, exports, module) {
 
         setup: function()
         {
-            this.get("/projects/{projectId}/account-list", this.index);
+            this.get("/projects/{projectId}/forrester-ui-account-list", this.index);
         },
 
         entityTypes: function()
         {
             return {
-                "plural": "forms",
-                "singular": "form"
-            }
+                "plural": "Accounts",
+                "singular": "Account"
+            };
         },
 
         doclistDefaultConfig: function()
@@ -45,71 +45,46 @@ define(function(require, exports, module) {
             return config;
         },
 
+        // doGitanaQuery: function(context, model, searchTerm, query, pagination, callback)
+        // {
+        //     var self = this;
+
+        //     OneTeam.listAddons(self, pagination, {}, function(err, addons) {
+        //         callback(addons);
+        //     });
+        // },
+
         doRemoteQuery: function(context, model, searchTerm, query, pagination, callback)
         {
             var self = this;
 
-            OneTeam.projectContentTypes(self, function(typeDescriptors, typeConfigs) {
+            OneTeam.projectBranch(self, function () {
 
-                // organize type descriptors by id
-                var typeDescriptorsById = [];
-                for (var i = 0; i < typeDescriptors.length; i++)
-                {
-                    typeDescriptorsById[typeDescriptors[i].id] = typeDescriptors[i];
-                }
+                var rows = [];
 
-                if (!query) {
-                    query = {};
-                }
-                query["_type"] = "n:form";
-
-                OneTeam.projectBranch(self, function () {
-
-                    var forms = {};
-                    var formIds = [];
-
-                    this.queryNodes(query, pagination).each(function () {
-                        forms[this._doc] = {
-                            "_doc": this._doc,
-                            "id": this._doc,
-                            "title": this.title,
-                            "type": "form",
-                            "created_on": this.getSystemMetadata().created_on,
-                            "created_by": this.getSystemMetadata().created_by,
-                            "modified_on": this.getSystemMetadata().modified_on,
-                            "modified_by": this.getSystemMetadata().modified_by
-                        };
-                        formIds.push(this._doc);
-                    }).then(function () {
-
-                        var totalRows = this.totalRows();
-                        var size = this.size();
-                        var offset = this.offset();
-
-                        OneTeam.projectBranch(self, function () {
-
-                            var rows = [];
-
-                            // look up all associations pointing to these forms
-                            this.queryNodes({
-                                "_type": "a:has_form",
-                                "target": {
-                                    "$in": formIds
-                                }
-                            }).each(function () {
-                                forms[this.target].key = this["form-key"];
-                                forms[this.target].definition = typeDescriptorsById[this.source];
-                                rows.push(forms[this.target]);
-                            }).then(function () {
-
-                                callback({
-                                    "rows": rows,
-                                    "totalRows": totalRows,
-                                    "size": size,
-                                    "offset": offset
-                                });
-                            });
-                        });
+                this.queryNodes({
+                    _type: "cxindex:company"
+                }, pagination).each(function () {
+                    var metadata = this.getSystemMetadata();
+                    rows.push({
+                        _doc: this._doc,
+                        clientid: this.clientid,
+                        title: this.title,
+                        created_on: metadata.created_on,
+                        created_by: metadata.created_by,
+                        modified_on: metadata.modified_on,
+                        modified_by: metadata.modified_by
+                    });
+                }).then(function () {
+                    var totalRows = this.totalRows();
+                    var size = this.size();
+                    var offset = this.offset();
+                
+                    callback({
+                        rows: rows,
+                        totalRows: this.totalRows(),
+                        size: this.size(),
+                        offset: this.offset()
                     });
                 });
             });
@@ -120,15 +95,12 @@ define(function(require, exports, module) {
             var self = this;
             var project = self.observable("project").get();
 
-            var definitionQName = row.definition.qname;
-            var formKey = row["key"];
-
-            return "/#/projects/" + project._doc + "/definitions/" + definitionQName + "/forms/" + formKey;
+            return "/#/projects/" + project._doc + "/documents/" + row._doc + "/properties";
         },
 
         iconClass: function(row)
         {
-            return "form-icon-64";
+            return "form-icon-32";
         },
 
         columnValue: function(row, item, model, context)
@@ -136,7 +108,7 @@ define(function(require, exports, module) {
             var self = this;
 
             var projectId = self.observable("project").get().getId();
-            var definitionId = row.definition.id;
+            var clientid = row.clientid;
 
             var value = this.base(row, item);
 

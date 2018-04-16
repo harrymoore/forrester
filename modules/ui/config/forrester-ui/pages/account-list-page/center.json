@@ -1,9 +1,26 @@
 {
-    "type": "account-list",
+    "type": "forrester-ui-account-list",
     "config": {
         "chrome": false,
-        "buttons": [],
-        "columns": [],
+        "buttons": [{
+            "key": "forrester-create-account",
+            "title": "Create a User",
+            "iconClass": "fa fa-plus",
+            "align": "left",
+            "action": "create-oneteam-user",
+            "allowPermission": [
+                "create_subobjects"
+            ]}
+        ],
+        "columns": [{
+            "title": "Name",
+            "type": "property",
+            "property": "name",
+            "link": true
+        }, {
+            "title": "Details",
+            "type": "details"
+        }],
         "icon": true,
         "checkbox": true,
         "loader": "gitana",

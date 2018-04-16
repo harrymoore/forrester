@@ -9,19 +9,11 @@
     "config": {
         "context": {
             "items": [{
-                "key": "account-list/header",
-                "title": "Accounts",
-                "order": 1000,
-                "header": true,
-                "iconClass": "fa fa-dashboard",
-                "allowAuthority": ["manager"],
-                "allowPermission": ["read"],
-                "rejectAuthority": [],
-                "rejectPermission": [],
+                "key": "project/content/heading",
                 "items": [{
                     "key": "forrester-ui/account-list",
                     "title": "Account List",
-                    "uri": "#/projects/{projectId}/account-list",
+                    "uri": "#/projects/{projectId}/forrester-ui-account-list",
                     "iconClass": "fa fa-pencil",
                     "allowPermission": [
                         "read"
