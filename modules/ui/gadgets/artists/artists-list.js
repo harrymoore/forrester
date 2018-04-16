@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
 
-    require("./artists-list.css");
+    require("css!./artists-list.css");
     var Ratchet = require("ratchet/web");
     var DocList = require("ratchet/dynamic/doclist");
     var OneTeam = require("oneteam");

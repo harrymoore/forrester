@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
 
-    require("./albums-list.css");
-    var html = require("./albums-list.html");
+    require("css!./albums-list.css");
+    var html = require("text!./albums-list.html");
 
     var Empty = require("ratchet/dynamic/empty");
     var $ = require("jquery");
