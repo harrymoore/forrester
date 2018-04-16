@@ -4,22 +4,23 @@
         "chrome": false,
         "buttons": [{
             "key": "forrester-create-account",
-            "title": "Create a User",
+            "title": "Create an Account",
             "iconClass": "fa fa-plus",
             "align": "left",
-            "action": "create-oneteam-user",
+            "action": "forrester-create-account",
             "allowPermission": [
                 "create_subobjects"
             ]}
         ],
         "columns": [{
-            "title": "Name",
-            "type": "property",
-            "property": "name",
+            "title": "Client ID",
+            "type": "key",
+            "property": "clientid",
             "link": true
         }, {
-            "title": "Details",
-            "type": "details"
+            "title": "Title",
+            "type": "key",
+            "property": "title"
         }],
         "icon": true,
         "checkbox": true,
