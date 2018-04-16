@@ -1,0 +1,6 @@
+{
+    "title": "Albums",
+    "uri": "/projects/{projectId}/albums",
+    "extends": "project/_project",
+    "template": "default"
+}
