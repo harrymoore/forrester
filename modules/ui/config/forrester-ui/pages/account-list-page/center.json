@@ -7,14 +7,11 @@
             "title": "Create an Account",
             "iconClass": "fa fa-plus",
             "align": "left",
-            "action": "create-content"
+            "action": "create-document"
         }],
         "columns": [{
-            "title": "Client ID",
-            "key": "clientid"
-        }, {
-            "title": "Title",
-            "key": "title"
+            "title": "Account",
+            "key": "account"
         }],
         "icon": true,
         "checkbox": true,
