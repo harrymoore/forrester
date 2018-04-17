@@ -48,14 +48,24 @@ define(function(require, exports, module) {
         doGitanaQuery: function(context, model, searchTerm, query, pagination, callback)
         {
             var self = this;
+            var user = self.observable("user").get();
 
             query = {};
 
             if (OneTeam.isEmptyOrNonExistent(query) && searchTerm)
             {
-                query = OneTeam.searchQuery(searchTerm, ["title", "description"]);
+                query = OneTeam.searchQuery(searchTerm, ["title", "clientid"]);
             }
             query._type = "cxindex:company";
+            // if (user) {
+            //     query._system = {
+            //         modified_by: user.name
+            //     }
+            // }
+
+            pagination.sort = {
+                "_system.modified_on.ms": -1
+            };
 
             OneTeam.projectBranch(self, function () {
 
@@ -90,7 +100,6 @@ define(function(require, exports, module) {
         columnValue: function(row, item, model, context)
         {
             var self = this;
-
             var projectId = self.observable("project").get().getId();
             var clientid = row.clientid;
 
@@ -122,6 +131,22 @@ define(function(require, exports, module) {
                     value += "<p class='list-row-info created'>Created " + bundle.relativeDate(date);
                     value += " by " + OneTeam.filterXss(systemMetadata.created_by) + "</p>";
                 }
+            } else if (item.key === "status") {
+                var engagement = row.engagement || [];
+                var completed = 0;
+                for(i = 0; i < engagement.length; i++) {
+                    if (engagement[i].completed) {
+                        completed++;
+                    }
+                }
+                value = "<p>Completed " + completed + " of " + engagement.length + " engagement steps</p>";
+
+                var resources = row.resources || [];
+                value += "<p>" + resources.length + " resource(s) attached:<ul>";
+                for(i = 0; i < resources.length; i++) {
+                    value += "<li><span>" + OneTeam.filterXss(resources[i].ResourceTitle) + "</span></li>";
+                }
+                value += "</ul></p>";
             }
 
             return value;
