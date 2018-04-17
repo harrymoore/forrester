@@ -7,11 +7,8 @@
             "title": "Create an Account",
             "iconClass": "fa fa-plus",
             "align": "left",
-            "action": "forrester-create-account",
-            "allowPermission": [
-                "create_subobjects"
-            ]}
-        ],
+            "action": "create-content"
+        }],
         "columns": [{
             "title": "Client ID",
             "key": "clientid"
