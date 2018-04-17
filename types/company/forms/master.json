@@ -49,7 +49,70 @@
                     }
                 }
             }
+        },
+        "resources": {
+            "type": "array",
+            "label": "Resources",
+            "helpers": [
+                "Attach resources",
+                "A Resource can be a file you upload here or a URL link to an online resource"
+            ],
+            "items": {
+                "type": "object",
+                "fields": {
+                    "ResourceTitle": {
+                        "type": "text",
+                        "label": "Title",
+                        "order": 1
+                    },
+                    "ResourceDescription": {
+                        "type": "text",
+                        "label": "Description",
+                        "order": 2
+                    },
+                    "ResourcePublishingDate": {
+                        "type": "text",
+                        "label": "Resource Publishing Date",
+                        "order": 3
+                    },
+                    "ResourceType": {
+                        "type": "select",
+                        "label": "Type of Resource",
+                        "required": true,
+                        "default": "binary",
+                        "optionLabels": [
+                            "URL Resource",
+                            "File Resource"
+                        ],
+                        "helpers": [
+                            "Select File Resource to upload a resource file",
+                            "Select URL Resource to enter the link address of an online resource"
+                        ],
+                        "order": 4
+                    },
+                    "ResourceURL": {
+                        "type": "url",
+                        "label": "URL",
+                        "order": 5,
+                        "dependencies": {
+                            "ResourceType": [
+                                "html"
+                            ]
+                        }
+                    },
+                    "binary": {
+                        "type": "related-content",
+                        "maxNumberOfFiles": 1,
+                        "uploadPath": "/Client Docs",
+                        "order": 6,
+                        "dependencies": {
+                            "ResourceType": [
+                                "binary"
+                            ]
+                        }
+                    }
+                }
+            }
         }
-    
     }
 }

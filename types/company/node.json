@@ -56,12 +56,10 @@
                     "ResourceType": {
                         "type": "string",
                         "title": "Type",
+                        "default": "binary",
                         "enum": [
                             "html",
-                            "pdf",
-                            "ms-doc",
-                            "image",
-                            "media"
+                            "binary"
                         ]
                     },
                     "ResourceDescription": {
@@ -85,9 +83,14 @@
                         "title": "Resource Publishing Date"
                     }
                 },
-                "required": [
-                    "ResourceType"
-                ]
+                "dependencies": {
+                    "ResourceURL": [
+                        "ResourceType"
+                    ],
+                    "binary": [
+                        "ResourceType"
+                    ]
+                }
             }
         }
     },
