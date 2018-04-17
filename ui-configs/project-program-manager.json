@@ -12,13 +12,20 @@
                                 "key": "project/content/heading",
                                 "items": [
                                     {
-                                        "key": "project/content",
+                                        "key": "forrester-ui/account-list",
+                                        "order": 1000,
                                         "title": "Accounts",
                                         "remove": false
                                     },
                                     {
+                                        "key": "project/content",
+                                        "order": 3000,
+                                        "remove": true
+                                    },
+                                    {
                                         "key": "project/documents",
-                                        "title": "Files (Documents)",
+                                        "order": 2000,
+                                        "title": "Files (Client Documents)",
                                         "remove": false
                                     },
                                     {
