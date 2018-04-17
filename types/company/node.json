@@ -1,8 +1,8 @@
 {
     "title": "Company",
+    "_qname": "cxindex:company",
     "_parent": "n:node",
     "description": "cxindex:company",
-    "_qname": "cxindex:company",
     "type": "object",
     "properties": {
         "clientid": {
@@ -46,12 +46,50 @@
             "type": "array",
             "title": "Resources",
             "items": {
+                "title": "Resource",
                 "type": "object",
-                "_relator": {
-                    "associationType": "a:linked",
-                    "nodeType": "cxindex:resource"
-                }
+                "properties": {
+                    "ResourceTitle": {
+                        "type": "string",
+                        "title": "Title"
+                    },
+                    "ResourceType": {
+                        "type": "string",
+                        "title": "Type",
+                        "enum": [
+                            "html",
+                            "pdf",
+                            "ms-doc",
+                            "image",
+                            "media"
+                        ]
+                    },
+                    "ResourceDescription": {
+                        "type": "string",
+                        "title": "Description"
+                    },
+                    "ResourceURL": {
+                        "type": "string",
+                        "title": "URL (optional)",
+                        "format": "url"
+                    },
+                    "binary": {
+                        "type": "object",
+                        "_relator": {
+                            "associationType": "a:linked",
+                            "nodeType": "n:node"
+                        }
+                    },
+                    "ResourcePublishingDate": {
+                        "type": "string",
+                        "title": "Resource Publishing Date"
+                    }
+                },
+                "required": [
+                    "ResourceType"
+                ]
             }
         }
-    }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#"
 }

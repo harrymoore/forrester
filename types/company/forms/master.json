@@ -3,5 +3,53 @@
     "_form_key": "master",
     "title": "Account",
     "fields": {
+        "clientid": {
+            "type": "text",
+            "disallowEmptySpaces": true,
+            "label": "Client ID",
+            "helpers": [
+                "Unique ID of client account from SAP"
+            ]
+        },
+        "title": {
+            "type": "text",
+            "label": "Client name"
+        },
+        "engagement": {
+            "type": "array",
+            "label": "Engagement Steps",
+            "items": {
+                "type": "object",
+                "fields": {
+                    "step": {
+                        "type": "node-picker",
+                        "label": "Step",
+                        "helpers": [
+                            "Choose an Engagement Step"
+                        ]
+                    },
+                    "titleOverride": {
+                        "type": "text",
+                        "label": "Title Override",
+                        "helpers": [
+                            "Override default step name"
+                        ]
+                    },
+                    "date": {
+                        "type": "date",
+                        "label": "Scheduled Date",
+                        "helpers": [
+                            "Enter the Scheduled or Completed Date for this step"
+                        ]
+                    },
+                    "completed": {
+                        "type": "checkbox",
+                        "rightLabel": "This step has been completed",
+                        "label": ""
+                    }
+                }
+            }
+        }
+    
     }
 }
