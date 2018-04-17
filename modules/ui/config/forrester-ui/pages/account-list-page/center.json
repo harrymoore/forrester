@@ -14,13 +14,10 @@
         ],
         "columns": [{
             "title": "Client ID",
-            "type": "key",
-            "property": "clientid",
-            "link": true
+            "key": "clientid"
         }, {
             "title": "Title",
-            "type": "key",
-            "property": "title"
+            "key": "title"
         }],
         "icon": true,
         "checkbox": true,

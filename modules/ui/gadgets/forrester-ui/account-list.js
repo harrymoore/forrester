@@ -45,16 +45,7 @@ define(function(require, exports, module) {
             return config;
         },
 
-        // doGitanaQuery: function(context, model, searchTerm, query, pagination, callback)
-        // {
-        //     var self = this;
-
-        //     OneTeam.listAddons(self, pagination, {}, function(err, addons) {
-        //         callback(addons);
-        //     });
-        // },
-
-        doRemoteQuery: function(context, model, searchTerm, query, pagination, callback)
+        doGitanaQuery: function(context, model, searchTerm, query, pagination, callback)
         {
             var self = this;
 
@@ -64,28 +55,8 @@ define(function(require, exports, module) {
 
                 this.queryNodes({
                     _type: "cxindex:company"
-                }, pagination).each(function () {
-                    var metadata = this.getSystemMetadata();
-                    rows.push({
-                        _doc: this._doc,
-                        clientid: this.clientid,
-                        title: this.title,
-                        created_on: metadata.created_on,
-                        created_by: metadata.created_by,
-                        modified_on: metadata.modified_on,
-                        modified_by: metadata.modified_by
-                    });
-                }).then(function () {
-                    var totalRows = this.totalRows();
-                    var size = this.size();
-                    var offset = this.offset();
-                
-                    callback({
-                        rows: rows,
-                        totalRows: this.totalRows(),
-                        size: this.size(),
-                        offset: this.offset()
-                    });
+                }, pagination).then(function () {
+                    callback(this);
                 });
             });
         },
