@@ -80,19 +80,11 @@ define(function(require, exports, module) {
             return "form-icon-32";
         },
 
-        // @override
-        populateActionContext: function(actionConfig, actionContext, callback)
+        customizeActionContext: function(actionContext, model, button)
         {
-            var self = this;
-
-            this.base(actionConfig, actionContext, function() {
-
-                if (!actionContext.model) { actionContext.model = {}; }
-                actionContext.model.typeQName = "cxindex:company";
-                actionContext.model.formKey = "master";
-                callback();
-
-            });
+               if (!actionContext.model) { actionContext.model = {}; }
+               actionContext.model.typeQName = "cxindex:company";
+               actionContext.model.formKey = "master";
         },
 
         columnValue: function(row, item, model, context)
@@ -121,11 +113,12 @@ define(function(require, exports, module) {
                 if (row.__system()) {
                     var systemMetadata = row.__system();
 
-                    var date = new Date(systemMetadata.modified_on.ms);
+                    var date;
+                    date = new Date(systemMetadata.modified_on.ms);
                     value += "<p class='list-row-info modified'>Modified " + bundle.relativeDate(date);
                     value += " by " + OneTeam.filterXss(systemMetadata.modified_by) + "</p>";
 
-                    var date = new Date(systemMetadata.created_on.ms);
+                    date = new Date(systemMetadata.created_on.ms);
                     value += "<p class='list-row-info created'>Created " + bundle.relativeDate(date);
                     value += " by " + OneTeam.filterXss(systemMetadata.created_by) + "</p>";
                 }

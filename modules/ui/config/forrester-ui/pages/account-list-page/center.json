@@ -7,7 +7,7 @@
             "title": "Create an Account",
             "iconClass": "fa fa-plus",
             "align": "left",
-            "action": "create-document"
+            "action": "create_document"
         }],
         "columns": [{
             "title": "Account",
