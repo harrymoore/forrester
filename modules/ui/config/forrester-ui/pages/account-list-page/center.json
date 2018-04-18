@@ -10,11 +10,14 @@
             "action": "create_document"
         }],
         "columns": [{
-            "title": "Recent Accounts",
-            "key": "account"
-        },{
-            "title": "",
-            "key": "status"
+                "title": "Recent Accounts",
+                "key": "account"
+            },{
+                "title": "",
+                "key": "steps"
+            },{
+                "title": "",
+                "key": "resources"
         }],
         "icon": true,
         "checkbox": true,

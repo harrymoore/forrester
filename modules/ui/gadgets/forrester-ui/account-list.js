@@ -131,7 +131,7 @@ define(function(require, exports, module) {
                     value += "<p class='list-row-info created'>Created " + bundle.relativeDate(date);
                     value += " by " + OneTeam.filterXss(systemMetadata.created_by) + "</p>";
                 }
-            } else if (item.key === "status") {
+            } else if (item.key === "steps") {
                 var engagement = row.engagement || [];
                 var completed = 0;
                 for(i = 0; i < engagement.length; i++) {
@@ -140,13 +140,14 @@ define(function(require, exports, module) {
                     }
                 }
                 value = "<p>Completed " + completed + " of " + engagement.length + " engagement steps</p>";
-
+            } else if (item.key === "resources") {
                 var resources = row.resources || [];
-                value += "<p>" + resources.length + " resource(s) attached:<ul>";
-                for(i = 0; i < resources.length; i++) {
-                    value += "<li><span>" + OneTeam.filterXss(resources[i].ResourceTitle) + "</span></li>";
-                }
-                value += "</ul></p>";
+                value = resources.length + " resource(s) attached";
+                // for(i = 0; i < resources.length; i++) {
+                    // value += "<li><p class='list-row-info>" + OneTeam.filterXss(resources[i].ResourceTitle) + "</p></li>";
+                //     value += "<p class='list-row-info>" + OneTeam.filterXss(resources[i].ResourceTitle) + "</p>";
+                // }
+                // value += "</ul>";
             }
 
             return value;

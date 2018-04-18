@@ -1,5 +1,11 @@
 {
-    "evaluator": "context-project",
+    "evaluator": "and",
+    "condition": [{
+        "evaluator": "project-has-module",
+        "condition": "forrester-ui"
+    }, {
+        "evaluator": "context-project"
+    }],
     "config": {
         "context": {
             "items": [{
