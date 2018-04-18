@@ -1,6 +1,0 @@
-{
-    "title": "Artists",
-    "uri": "/projects/{projectId}/artists",
-    "extends": "project/_project",
-    "template": "default"
-}
