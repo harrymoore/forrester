@@ -1,0 +1,11 @@
+{
+    "title": "change-type",
+    "actions": [
+        {
+            "type": "executeScriptNode",
+            "config": {
+                "scriptNodeId": ""
+            }
+        }
+    ]
+}
