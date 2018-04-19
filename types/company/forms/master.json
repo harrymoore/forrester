@@ -65,16 +65,6 @@
                         "label": "Title",
                         "order": 1
                     },
-                    "ResourceDescription": {
-                        "type": "text",
-                        "label": "Description",
-                        "order": 2
-                    },
-                    "ResourcePublishingDate": {
-                        "type": "text",
-                        "label": "Resource Publishing Date",
-                        "order": 3
-                    },
                     "ResourceType": {
                         "type": "select",
                         "label": "Type of Resource",
@@ -85,15 +75,14 @@
                             "File Resource"
                         ],
                         "helpers": [
-                            "Select File Resource to upload a resource file",
-                            "Select URL Resource to enter the link address of an online resource"
+                            "Select File Resource to upload a resource file. Select URL Resource to enter the link address of an online resource"
                         ],
-                        "order": 4
+                        "order": 2
                     },
                     "ResourceURL": {
                         "type": "url",
                         "label": "URL",
-                        "order": 5,
+                        "order": 3,
                         "dependencies": {
                             "ResourceType": [
                                 "html"
@@ -104,10 +93,37 @@
                         "type": "related-content",
                         "maxNumberOfFiles": 1,
                         "uploadPath": "/Client Docs",
-                        "order": 6,
+                        "order": 4,
                         "dependencies": {
                             "ResourceType": [
                                 "binary"
+                            ]
+                        }
+                    },
+                    "fullMetadata": {
+                        "type": "checkbox",
+                        "rightLabel": "Include Description and Publish Date fields",
+                        "title": "",
+                        "label": "",
+                        "order": 5
+                    },
+                    "ResourceDescription": {
+                        "type": "text",
+                        "label": "Description",
+                        "order": 6,
+                        "dependencies": {
+                            "fullMetadata": [
+                                true
+                            ]
+                        }
+                    },
+                    "ResourcePublishingDate": {
+                        "type": "text",
+                        "label": "Resource Publishing Date",
+                        "order": 7,
+                        "dependencies": {
+                            "fullMetadata": [
+                                true
                             ]
                         }
                     }

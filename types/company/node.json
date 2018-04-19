@@ -1,5 +1,5 @@
 {
-    "title": "Company",
+    "title": "Account",
     "_qname": "cxindex:company",
     "_parent": "n:node",
     "description": "cxindex:company",
@@ -62,6 +62,9 @@
                             "binary"
                         ]
                     },
+                    "fullMetadata": {
+                        "type": "boolean"
+                    },
                     "ResourceDescription": {
                         "type": "string",
                         "title": "Description"
@@ -84,6 +87,12 @@
                     }
                 },
                 "dependencies": {
+                    "ResourceDescription": [
+                        "fullMetadata"
+                    ],
+                    "ResourcePublishingDate": [
+                        "fullMetadata"
+                    ],
                     "ResourceURL": [
                         "ResourceType"
                     ],
