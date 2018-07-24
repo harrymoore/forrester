@@ -7,7 +7,7 @@
         "evaluator": "context-project"
     }],
     "config": {
-        "context": {
+        "project-context": {
             "items": [{
                 "key": "project/content/heading",
                 "items": [{
