@@ -1,25 +1,28 @@
 {
-    "evaluator": "and",
-    "condition": [{
-        "evaluator": "project-has-module",
-        "condition": "forrester-ui"
-    }, {
-        "evaluator": "context-project"
-    }],
+    "evaluator": "context-project",
     "config": {
         "project-context": {
-            "items": [{
-                "key": "project/content/heading",
-                "items": [{
-                    "key": "forrester-ui/account-list",
-                    "title": "Accounts",
-                    "uri": "#/projects/{projectId}/forrester-ui-account-list",
-                    "iconClass": "fa fa-pencil",
-                    "allowPermission": [
-                        "read"
+            "items": [
+                {
+                    "key": "project",
+                    "items": [
+                        {
+                            "key": "project/content/heading",
+                            "items": [
+                                {
+                                    "key": "forrester-ui/account-list",
+                                    "title": "Accounts",
+                                    "uri": "#/projects/{projectId}/forrester-ui-account-list",
+                                    "iconClass": "fa fa-pencil",
+                                    "allowPermission": [
+                                        "read"
+                                    ]
+                                }
+                            ]
+                        }
                     ]
-                }]
-            }]
+                }
+            ]
         }
     }
 }
